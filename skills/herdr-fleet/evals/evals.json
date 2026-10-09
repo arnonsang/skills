@@ -1,0 +1,19 @@
+{
+  "skill_name": "herdr-fleet",
+  "evals": [
+    {
+      "id": 1,
+      "name": "two-disjoint-slices",
+      "prompt": "In the git repo at <REPO> implement this plan with herdr workers, using the fleet workflow. Slice `slugify`: add src/slugify.js exporting slugify(str) (lowercase, runs of spaces/punctuation become one '-', no leading/trailing '-') plus test/slugify.test.js. Slice `truncate`: add src/truncate.js exporting truncate(str, n) that cuts to n characters and appends '...' only when it cut, plus test/truncate.test.js. Both must be re-exported from src/index.js. Roles are already chosen: workers are codex with `-m <fast-model> -c model_reasoning_effort=\"low\"`, no reviewer, at most 2 workers. The slices are approved; do not ask me anything. Do not commit on main. Leave the integrated result on a branch named fleet-integration in the repo, clean up after yourself, and write a short summary to <OUTPUTS>/summary.md.",
+      "expected_output": "Two codex workers in separate worktrees, file briefs with house rules, background status watching, orchestrator verifies diffs and tests itself, src/index.js handled by the orchestrator, fleet-integration branch with both helpers and passing npm test, only its own panes closed, worktrees removed, ledger written.",
+      "files": []
+    },
+    {
+      "id": 2,
+      "name": "dependent-wave-and-followup",
+      "prompt": "Use herdr workers on the repo at <REPO>. Plan: slice `money` adds src/money.js exporting formatTHB(satang) that returns e.g. '1,234.50 THB' for 123450, with test/money.test.js. Slice `invoice` adds src/invoice.js exporting invoiceLine(description, satang) returning '<description>: <formatTHB(satang)>', with test/invoice.test.js; it depends on money. Export both from src/index.js. Workers: codex `-m <fast-model> -c model_reasoning_effort=\"low\"`, no reviewer. Approved, don't ask me. After both are done and verified, apply this follow-up from me: formatTHB should put the currency first, 'THB 1,234.50', and the invoice test must still pass. No commits on main; leave the result on branch fleet-integration, clean up, and write a short summary to <OUTPUTS>/summary.md.",
+      "expected_output": "Two waves (invoice after money), follow-up sent to the existing money worker rather than a new agent, invoice test updated or still passing, fleet-integration branch green, only own panes closed after everything is verified, worktrees removed, ledger written.",
+      "files": []
+    }
+  ]
+}
