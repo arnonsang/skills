@@ -11,9 +11,11 @@
 
 ## Skills
 
-| Skill | What it does |
-|---|---|
-| [`herdr-fleet`](skills/herdr-fleet/SKILL.md) | Runs a parallel coding fleet through Herdr. It splits a plan into slices that own separate files, gives every worker its own git worktree (and test database), briefs workers by file, watches them in the background, verifies their work itself, integrates in order, and closes only the panes it created. |
+| Skill | What it does | Details |
+|---|---|---|
+| [`herdr-fleet`](skills/herdr-fleet/) | Runs a parallel coding fleet through Herdr: separate slices, one worktree per worker, background watching, orchestrator-side verification, safe pane teardown. | [README](skills/herdr-fleet/README.md) |
+
+Each skill's folder has its own README with what it does, why it exists, and how it was tested.
 
 ## Install
 
@@ -21,65 +23,31 @@
 # every skill in this repo
 npx skills add arnonsang/skills
 
-# just one
-npx skills add arnonsang/skills --skill herdr-fleet
+# one skill
+npx skills add arnonsang/skills --skill <skill-name>
 
-# see what is inside first
+# list what is inside first
 npx skills add arnonsang/skills --list
 ```
 
-## The story behind `herdr-fleet`
-
-I build a production AI platform mostly by orchestrating coding agents: one agent plans and reviews while several others implement in parallel, each in its own pane in Herdr, a terminal workspace for coding agents. It is fast when it works. In the early runs it often did not.
-
-Every rule in the skill exists because something went wrong:
-
-- **A worker ran the formatter in write mode** and rewrote files that another worker was editing. Briefs now forbid write-mode formatters and linters.
-- **Two workers ran the test suite against the same database.** Each truncated the other's rows, and one worker spent a whole cycle chasing a foreign-key error that was not real. Each worker now gets its own worktree and a cloned database, never a freshly migrated empty one.
-- **Shared checkouts broke compiles.** The test step compiled the whole tree, so one half-written file failed everyone. Now each worker has its own worktree.
-- **Idle agents from other projects looked like leftovers.** Closing them would have killed someone else's work. The skill keeps a ledger and only touches panes it created.
-- **About 30 resumed agents plus a build and a headless browser ran a 16 GB machine out of memory.** Heavy jobs now wait for free memory and run one at a time.
-- **A long multi-line prompt was typed into a shell** after its agent had exited. Briefs are now files, sent as a one-line prompt.
-- **Workers claimed tests passed when they had not.** The orchestrator reruns every check itself before anything is merged.
-
-The first live evaluation turned up four more problems that only show with real agents:
-- Codex sometimes drops the first prompt.
-- It stops at a folder-trust question in a new worktree.
-- Agent names collide across sessions.
-- Some agents refuse to write outside their working directory.
-
-The skill now handles all four.
-
-### Does it help?
-
-Measured on real Herdr runs with real codex workers, with and without the skill:
-
-| | With skill | Without |
-|---|---|---|
-| Two independent slices | 15 / 15 checks | 14 / 15 |
-| Dependent waves plus a follow-up fix | 19 / 19 | 17 / 19 |
-| Time per run | 234 s | 246 s |
-
-The checks cover:
-- a green integration branch;
-- each worker in its own worktree;
-- briefs carrying the safety rules;
-- background monitoring rather than a blocking wait;
-- the orchestrator verifying the work itself;
-- follow-ups going to the worker that already has the context;
-- the 24 panes from other work left untouched, and every pane the run created closed.
-
-## Layout
+## Adding a skill
 
 ```
 skills/
   <skill-name>/
-    SKILL.md        # frontmatter (name, description) and instructions
-    scripts/        # helpers the skill runs
-    assets/         # templates the skill copies
-    references/     # docs loaded on demand
-    evals/          # prompts used to test the skill while building it
+    SKILL.md        # required: frontmatter (name, description) and instructions
+    README.md       # what it does, the story behind it, how it was tested
+    scripts/        # optional helpers the skill runs
+    assets/         # optional templates the skill copies
+    references/     # optional docs loaded on demand
+    evals/          # optional test prompts
 ```
+
+1. Create `skills/<skill-name>/SKILL.md`. The frontmatter `name` must match the folder name, and the `description` says what the skill does and when an agent should use it.
+2. Add `README.md` next to it, using the same sections as the existing skills.
+3. Keep it free of private details: no internal hostnames, credentials, customer data or personal paths.
+4. Check the CLI finds it: `npx skills add . --list`.
+5. Add a row to the Skills table above.
 
 ## About
 
