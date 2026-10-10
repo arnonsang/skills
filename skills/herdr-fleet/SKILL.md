@@ -68,7 +68,7 @@ One brief file per slice at `<repo>/.scratch/fleet/<run>/<slice>.brief.md`, from
 - The goal, the done-when checks, and the exact files it owns. Everything else is read-only.
 - The verification commands to run in its own worktree (typecheck, lint read-only, the relevant tests), and the instruction to report their real output.
 - The house rules that workers have broken before:
-  - No git writes of any kind (no commit, branch, stash, rebase, push). You integrate.
+  - No git writes of any kind (no commit, branch, stash, rebase, push). You integrate. Name `git stash` explicitly and give the alternative (`git diff`, `git show HEAD:<file>` for a baseline): workers reach for it to compare lint output against HEAD and break this rule even when it is in bold. Check `git stash list` when verifying.
   - No formatter or linter in write mode (`biome --write`, `--fix`, `prettier -w`, `eslint --fix`): it rewrites files the worker does not own. Read-only checks only.
   - No new dependencies without saying so in the report.
   - The user's code style (imports at the top, one-line comments, ASCII only - no em-dash or box-drawing characters).
