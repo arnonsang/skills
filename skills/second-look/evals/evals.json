@@ -1,0 +1,26 @@
+{
+  "skill_name": "second-look",
+  "evals": [
+    {
+      "id": 1,
+      "name": "landing-page-cleanup",
+      "prompt": "our landing page for Ledgerly (bookkeeping for small design studios) looks super AI generated and my cofounder hates it. files are in <FILES>: landing.html and tokens.css (our real tokens). clean it up so it looks like someone actually designed it. keep the brand gradient on the logo, thats our mark. you have my approval for whatever fixes you think are right, dont ask me. save the fixed page as <OUTPUTS>/landing.html (copy tokens.css next to it) and a short report of what you changed and how you checked it in <OUTPUTS>/report.md",
+      "expected_output": "Fixed landing.html using tokens.css values: no gradient text except the logo, no glow blobs or glass cards, no repeated eyebrows or 01/02/03 markers, no emoji icon tiles, hero-metric row replaced, buzzwords and em dashes gone, placeholder testimonial replaced, one primary CTA with a specific label, no bounce or idle pulse, no overflow at 320px, gaps instead of sibling margins. Report lists changes and measured verification in both themes.",
+      "files": ["evals/files/landing.html", "evals/files/tokens.css"]
+    },
+    {
+      "id": 2,
+      "name": "dashboard-review-and-donts",
+      "prompt": "before we ship the new overview screen can you give it a proper design review? <FILES>/dashboard.html, tokens in <FILES>/tokens.css, theme switches with data-theme=\"dark\" on html. fix what's wrong (approved, go ahead) and then write a Don'ts section into an AGENTS.md so our coding agents stop doing this stuff. outputs: <OUTPUTS>/dashboard.html, <OUTPUTS>/tokens.css, <OUTPUTS>/AGENTS.md, <OUTPUTS>/report.md",
+      "expected_output": "Hover states fixed so text stays readable (button:hover no longer paints text color as background), side-stripe alerts replaced with tinted or outlined alerts with icon/label, status colors no longer used as chart series (categorical chart-1..5 instead, six categories reduced or grouped), one primary button with a verb+object label, KPI heading icons removed, uppercase table headers in sentence case, sibling margins replaced by gap, KPI grid works at 320px, bar height transition replaced. The 'Invoice note style' guide quoting buzzwords and the brand-gradient mark and the joined segmented control are kept, not 'fixed'. AGENTS.md has a Don'ts table with do-instead in Ledgerly token names and a check column, and tells agents to run the lint.",
+      "files": ["evals/files/dashboard.html", "evals/files/tokens.css"]
+    },
+    {
+      "id": 3,
+      "name": "q3-deck-from-csv",
+      "prompt": "make me a short Q3 update deck (5-6 slides, single html file I can present from the browser and print to pdf) for Ledgerly using our tokens in <FILES>/tokens.css and the numbers in <FILES>/q3.csv. it's for our investors so it should not look like every other AI generated slide deck. save to <OUTPUTS>/deck.html (copy tokens.css next to it) plus <OUTPUTS>/report.md explaining the choices",
+      "expected_output": "A 16:9 deck using tokens.css colors and fonts, varied layouts (not centered title over three cards on every slide), takeaway titles stating the finding, a chart using chart-1..5 (not status colors) with a source and table or direct labels, real figures from q3.csv with units, no gradient backgrounds on every slide, keyboard navigation and print-to-PDF one slide per page, contrast checked in its styles.",
+      "files": ["evals/files/q3.csv", "evals/files/tokens.css"]
+    }
+  ]
+}

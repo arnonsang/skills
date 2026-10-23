@@ -1,0 +1,19 @@
+/* Ledgerly design tokens. Light is the default; dark via [data-theme="dark"]. */
+:root {
+  --bg: #fbfaf7; --surface: #ffffff; --surface-2: #f2f0ea; --border-subtle: #e4e1d8; --border: #c9c5b8;
+  --text: #1d1b16; --text-muted: #5c584d; --accent: #0f6b5c; --accent-hover: #0b5448; --accent-text: #0f6b5c; --on-accent: #ffffff;
+  --accent-soft: #e2f1ed; --danger: #b3261e; --danger-soft: #fbe9e7; --warning: #8a5a00; --warning-soft: #fdf1dc; --success: #2e7d32; --success-soft: #e6f3e7;
+  --brand-gradient: linear-gradient(135deg, #0f6b5c, #2c8f6f);
+  --font-sans: "Inter", system-ui, sans-serif; --font-display: "Fraunces", Georgia, serif;
+  --text-sm: 0.875rem; --text-md: 1rem; --text-lg: 1.25rem; --text-xl: 1.75rem; --text-display: clamp(2rem, 5vw, 3.25rem);
+  --gap-inline-xs: 4px; --gap-inline-sm: 8px; --gap-inline-md: 12px; --gap-stack-sm: 8px; --gap-stack-md: 16px; --gap-stack-lg: 32px; --gap-section: 64px;
+  --radius-sm: 6px; --radius-md: 10px; --shadow-sm: 0 1px 2px rgb(29 27 22 / .08); --shadow-md: 0 4px 12px rgb(29 27 22 / .10);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1); --ease-in: cubic-bezier(0.7, 0, 0.84, 0); --dur-fast: 120ms; --dur-base: 200ms;
+  --chart-1: #0f6b5c; --chart-2: #b35c00; --chart-3: #3d5afe; --chart-4: #a3236b; --chart-5: #6d6a00;
+}
+[data-theme="dark"] {
+  --bg: #15140f; --surface: #1e1d17; --surface-2: #29271f; --border-subtle: #34322a; --border: #4a473c;
+  --text: #f1eee6; --text-muted: #b3ae9f; --accent: #3fb59c; --accent-hover: #5cc8b0; --accent-text: #5cc8b0; --on-accent: #0b1f1a;
+  --accent-soft: #163a32; --danger: #f2a39d; --danger-soft: #3d1a17; --warning: #f0c060; --warning-soft: #3a2c0d; --success: #8fd19a; --success-soft: #19331c;
+  --chart-1: #3fb59c; --chart-2: #e08a3c; --chart-3: #7f95ff; --chart-4: #e06aa8; --chart-5: #c2bd3a;
+}
