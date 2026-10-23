@@ -1,0 +1,20 @@
+{
+  "skill_name": "pixel-proof",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "A worker says the new settings page is done and passes. The site is built and served at http://127.0.0.1:3000 and the page is /settings. Verify it properly before I merge. We care about light and dark and phones.",
+      "expected_output": "Runs the gate on /settings in light and dark at 320 and 1440 with lints, axe and overflow; does not just trust the worker; reports real numbers and what was not tested."
+    },
+    {
+      "id": 2,
+      "prompt": "We just rebuilt the docs site from the old single-page reference at ./reference/page.html. Drive through the whole thing and give me screenshots so I can review everything works as expected, every case you can think of.",
+      "expected_output": "Launches or briefs a separate QA worker with playwright-cli covering controls, keyboard, open states and console errors; compares against the reference page side by side; produces named screenshots and a report with numbered issues and a not-tested list."
+    },
+    {
+      "id": 3,
+      "prompt": "I publish a shadcn-style registry from this repo. 30 new components were added by workers in parallel. Before release, prove a consumer can actually install and render them.",
+      "expected_output": "Builds the registry against a local origin, creates a fresh app, inits from the style URL, adds every item with --overwrite using a real array of names, builds, runs axe on the installed app in both themes, and kills the file server by pid."
+    }
+  ]
+}

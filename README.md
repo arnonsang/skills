@@ -15,6 +15,7 @@
 |---|---|---|
 | [`herdr-fleet`](skills/herdr-fleet/) | Runs a parallel coding fleet through Herdr: separate slices, one worktree per worker, background watching, orchestrator-side verification, safe pane teardown. | [README](skills/herdr-fleet/README.md) |
 | [`second-look`](skills/second-look/) | Reviews UI that looks machine-made, fixes it with the project's own tokens, proves the fix in both themes and three widths, and leaves a Don'ts list so it stays fixed. | [README](skills/second-look/README.md) |
+| [`pixel-proof`](skills/pixel-proof/) | Verifies UI work with evidence: a parameterized lint, axe and overflow gate in light and dark at 320 and 1440, a browser QA worker brief with named screenshots, fidelity and fresh-install checks, and rules so the orchestrator never trusts a worker's "done". Pairs with `second-look`. | [README](skills/pixel-proof/README.md) |
 
 Each skill's folder has its own README with what it does, why it exists, and how it was tested.
 
