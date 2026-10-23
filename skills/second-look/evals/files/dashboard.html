@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ledgerly: Overview</title>
+<link rel="stylesheet" href="tokens.css">
+<style>
+  body { margin: 0; font-family: var(--font-sans); background: var(--bg); color: var(--text); }
+  .app { display: grid; grid-template-columns: 220px 1fr; min-height: 100vh; }
+  .side { background: var(--surface); border-right: 1px solid var(--border-subtle); padding: 16px; display: flex; flex-direction: column; gap: var(--gap-stack-sm); }
+  .mark { width: 28px; height: 28px; border-radius: 8px; background: var(--brand-gradient); }
+  .side a { color: var(--text-muted); text-decoration: none; padding: 6px 8px; border-radius: var(--radius-sm); }
+  main { padding: 24px; display: flex; flex-direction: column; gap: var(--gap-stack-lg); min-width: 0; }
+  .head { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: var(--gap-inline-md); }
+  .seg { display: inline-flex; border: 1px solid var(--border); border-radius: var(--radius-sm); overflow: hidden; }
+  .seg button { border: 0; background: var(--surface); color: var(--text); padding: 6px 12px; font: inherit; }
+  .seg button + button { border-left: 1px solid var(--border); }
+  .seg button[aria-pressed="true"] { background: var(--accent-soft); color: var(--accent-text); }
+  .btn { font: inherit; padding: 8px 14px; border-radius: var(--radius-sm); border: 1px solid var(--border); background: var(--surface); color: var(--text); cursor: pointer; }
+  .btn-primary { background: var(--accent); color: var(--on-accent); border-color: var(--accent); }
+  button:hover { background: var(--text); }
+  .kpis { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .kpi { background: var(--surface); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 16px; }
+  .kpi h3 { display: flex; align-items: center; font-size: var(--text-sm); color: var(--text-muted); margin: 0 0 8px; }
+  .kpi h3 .ico { width: 28px; height: 28px; border-radius: 8px; background: var(--accent-soft); margin-right: 8px; display: inline-grid; place-items: center; }
+  .kpi b { font-size: var(--text-xl); }
+  .alert { padding: 12px 16px; border-radius: var(--radius-sm); background: var(--surface); }
+  .alert.warn { border-left: 4px solid var(--warning); }
+  .alert.err { border-left: 4px solid var(--danger); }
+  .alerts { display: flex; flex-direction: column; }
+  .alerts > * { margin-bottom: 8px; }
+  .chart { background: var(--surface); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 16px; }
+  .bars { display: flex; align-items: flex-end; gap: var(--gap-inline-sm); height: 160px; }
+  .bars div { flex: 1; border-radius: 4px 4px 0 0; transition: height .4s; }
+  .legend { display: flex; gap: var(--gap-inline-md); font-size: var(--text-sm); color: var(--text-muted); }
+  .legend i { display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 4px; }
+  .guide { background: var(--surface-2); border-radius: var(--radius-md); padding: 16px; font-size: var(--text-sm); }
+  table { width: 100%; border-collapse: collapse; background: var(--surface); }
+  th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--border-subtle); }
+  th { font-size: 11px; text-transform: uppercase; letter-spacing: .12em; color: var(--text-muted); }
+</style>
+</head>
+<body>
+<div class="app">
+  <aside class="side"><div class="mark" aria-label="Ledgerly"></div><a href="#">Overview</a><a href="#">Invoices</a><a href="#">Expenses</a><a href="#">Reports</a></aside>
+  <main>
+    <div class="head">
+      <h1>Overview</h1>
+      <div class="seg" role="group" aria-label="Range"><button aria-pressed="false">7d</button><button aria-pressed="true">30d</button><button aria-pressed="false">90d</button></div>
+      <div><button class="btn">Export</button> <button class="btn btn-primary">Submit</button> <button class="btn btn-primary">New invoice</button></div>
+    </div>
+    <div class="kpis">
+      <div class="kpi"><h3><span class="ico">💰</span>Revenue</h3><b>$48,210</b></div>
+      <div class="kpi"><h3><span class="ico">📄</span>Open invoices</h3><b>17</b></div>
+      <div class="kpi"><h3><span class="ico">⏱️</span>Avg. days to pay</h3><b>23</b></div>
+      <div class="kpi"><h3><span class="ico">📈</span>Growth</h3><b>+12%</b></div>
+    </div>
+    <div class="alerts">
+      <div class="alert warn">3 invoices are overdue by more than 30 days.</div>
+      <div class="alert err">Bank feed for Kasikorn ending 4471 disconnected.</div>
+    </div>
+    <div class="chart">
+      <h2>Revenue by client type</h2>
+      <div class="bars"><div style="height:80%;background:var(--success)"></div><div style="height:55%;background:var(--warning)"></div><div style="height:35%;background:var(--danger)"></div><div style="height:20%;background:#8b5cf6"></div><div style="height:12%;background:#ec4899"></div><div style="height:9%;background:#06b6d4"></div></div>
+      <div class="legend"><span><i style="background:var(--success)"></i>Agencies</span><span><i style="background:var(--warning)"></i>Studios</span><span><i style="background:var(--danger)"></i>Freelancers</span><span><i style="background:#8b5cf6"></i>Retail</span><span><i style="background:#ec4899"></i>Nonprofit</span><span><i style="background:#06b6d4"></i>Other</span></div>
+    </div>
+    <div class="guide" data-second-look-dont>
+      <h2>Invoice note style</h2>
+      <p>Write notes clients can act on. Avoid words like "seamless" or "effortless"; say what was delivered and when.</p>
+    </div>
+    <table>
+      <thead><tr><th>Client</th><th>Invoice</th><th>Due</th><th>Amount</th></tr></thead>
+      <tbody>
+        <tr><td>Baan Noi Studio</td><td>INV-2291</td><td>Oct 4</td><td>$3,120.00</td></tr>
+        <tr><td>Kittiya Design Co.</td><td>INV-2288</td><td>Sep 28</td><td>$1,845.50</td></tr>
+        <tr><td>Morrow &amp; Lane</td><td>INV-2284</td><td>Sep 19</td><td>$7,400.00</td></tr>
+      </tbody>
+    </table>
+  </main>
+</div>
+</body>
+</html>
